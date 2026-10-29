@@ -8,8 +8,8 @@ from scipy.signal import savgol_filter
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 
-INPUT_CSV = SCRIPT_DIR / "merged_data.csv"
-OUTPUT_DIR = SCRIPT_DIR / "processed_spectra"
+INPUT_CSV = SCRIPT_DIR / "Data" / "raw_data.csv"
+OUTPUT_DIR = SCRIPT_DIR / "Data"
 OUTPUT_PREFIX = "processed_by"
 FLOAT_FORMAT = "%.10g"
 METHODS = ["moving_average", "sg_smoothing", "sg_first_derivative", "snv", "sg_second_derivative", "msc"]
