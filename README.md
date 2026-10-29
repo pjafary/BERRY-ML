@@ -4,7 +4,7 @@ Spectral preprocessing, seven-class raspberry phenology benchmarks, PCA-guided w
 
 ## 1. Install and activate the environment
 
-Install [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/) or another Conda distribution, then run in a terminal:
+Install a Conda distribution, then run in a terminal:
 
 ```bash
 git clone https://github.com/pjafary/BERRY-ML.git
