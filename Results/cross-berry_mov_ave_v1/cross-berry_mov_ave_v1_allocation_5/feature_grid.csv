@@ -1,0 +1,2 @@
+candidate,specification,mean_normalized_fisher,mean_inter_interval_abs_correlation,selection_score
+1,"[{""name"": ""domain_1"", ""start_nm"": 520.0, ""end_nm"": 560.0}, {""name"": ""domain_2"", ""start_nm"": 680.0, ""end_nm"": 720.0}, {""name"": ""domain_3"", ""start_nm"": 770.0, ""end_nm"": 810.0}]",0.0,0.6086231048976293,-0.15215577622440732
