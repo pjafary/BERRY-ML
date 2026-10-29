@@ -1,6 +1,8 @@
 # BERRY-ML
 
-Spectral preprocessing, seven-class raspberry phenology benchmarks, PCA-guided wavelength selection, and classifier-agnostic interval selection. The repository includes the raw spectra, processed spectra, five stratified allocations, and an example set of results.
+This repository provides data, codes, and other related information for our research paper "Band-Efficient Evaluation of Raspberry Ripeness and Yield using Machine Learning (BARRY-ML)", currently submitted to the Engineering Applications of Artificial Intelligence journal.
+
+High precision reflectance spectroscopy was conducted on seven phenology-based growth stages of raspberries and a classifier-agnostic feature selection algorithm was developed. The entire pipeline including spectral preprocessing, full-spectrum classifier optimization, PCA-based wavelength selection, and classifier-agnostic optimal interval selection is described and available here for research reproducibility.
 
 ## 1. Install and activate the environment
 
