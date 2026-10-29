@@ -54,7 +54,7 @@ Then run:
 python preprocess_spectra.py
 ```
 
-The file currently defaults to `merged_data.csv` in the repository root and includes `msc` in `METHODS`; change the settings above to use the supplied `Data/raw_data.csv` and to reproduce the five non-MSC outputs. Each method is applied independently to the raw spectrum. Moving average uses a three-point window; Savitzky–Golay smoothing and derivatives use a five-point, second-order polynomial. A preprocessing settings JSON is written alongside the output CSVs. The benchmarks below use the supplied moving-average CSV unless a different preprocessing method is explicitly selected.
+Each method is applied independently to the raw spectrum. Moving average uses a three-point window; Savitzky–Golay smoothing and derivatives use a five-point, second-order polynomial. A preprocessing settings JSON is written alongside the output CSVs. The benchmarks below use the supplied moving-average CSV unless a different preprocessing method is explicitly selected.
 
 ## 4. Run the full-spectrum baseline
 
@@ -68,16 +68,15 @@ OUTPUT_DIR = SCRIPT_DIR / "Results" / "full_spectrum_moving_average"
 OUTPUT_PREFIX = "full_spectrum_moving_average"
 INFERENCE_MODEL_PATH = None
 ```
-
-The checked-in `DATA_CSV` currently points to the Savitzky–Golay first-derivative CSV. Change it to the moving-average CSV to compare this baseline with the moving-average PCA and interval experiments.
+You can run the file directly in your code editor or through you terminal by: 
 
 ```bash
 python full_spectrum_benchmark.py
 ```
 
-This script trains all seven classifiers on every measured wavelength, with no external wavelength selection. PCA-LDA still fits PCA inside its own classifier pipeline.
+This script trains all seven classifiers on every measured wavelength, with no external wavelength selection. Note that PCA-LDA still fits PCA inside its own classifier pipeline, but it will have access to full spectral data.
 
-## 5. Run PCA-guided band selection
+## 5. Run PCA-based band selection
 
 In `pca_band_benchmark.py`, confirm the same `DATA_CSV` and allocation directory, and set a separate output directory:
 
@@ -89,6 +88,7 @@ N_SELECTION_PCS = 6
 N_WAVELENGTHS_PER_PC = 6
 INFERENCE_MODEL_PATH = None
 ```
+You can run the code in the terminal by:
 
 ```bash
 python pca_band_benchmark.py
@@ -123,7 +123,8 @@ DOMAIN_SEARCH = [
 ]
 ```
 
-### Fixed literature-inspired cross-berry intervals
+### Fixed band intervals
+If you have one or more specific wavelength ranges that you want to test, you can adjust the `min_nm` ,  `max_nm` , `width_nm` , and `step_nm` to restrict the algorithm accordingly.
 
 ```python
 OUTPUT_DIR = SCRIPT_DIR / "Results" / "cross_berry_moving_average"
@@ -135,7 +136,7 @@ DOMAIN_SEARCH = [
 ]
 ```
 
-When `min_nm + width_nm == max_nm`, each domain has just one candidate interval. Thus the last configuration evaluates fixed intervals rather than searching for their locations. The checked-in script currently activates 1110–1150 nm as its third region and has 770–810 nm commented out; replace the entire `DOMAIN_SEARCH` list with the desired configuration.
+When `min_nm + width_nm == max_nm`, each domain has just one candidate interval. Thus the last configuration evaluates fixed intervals rather than searching for their locations. Replace the entire `DOMAIN_SEARCH` list with the desired configuration.
 
 After each edit, run:
 
@@ -182,6 +183,4 @@ INFERENCE_CSV = SCRIPT_DIR / "Data" / "new_spectra_processed_by_moving_average.c
 INFERENCE_OUTPUT_CSV = OUTPUT_DIR / "new_predictions.csv"
 ```
 
-Run that script again. When `INFERENCE_MODEL_PATH` is set, it loads the chosen saved model and writes `sample_id,predicted_stage` to `INFERENCE_OUTPUT_CSV`; it does not retrain. Use the full-spectrum script for full-spectrum artifacts, the PCA script for PCA-band artifacts, and the interval script for interval artifacts. The saved model includes its required wavelength grid and selected feature definition. Some checked-in JSON metadata contains the original machine's absolute `saved_model` path; use the `.joblib` file beside that JSON in the repository instead.
-
-This dataset tests raspberry spectra only. The literature-inspired cross-berry intervals have not been validated on other berry crops or on a reduced-band sensor.
+Run that script again. When `INFERENCE_MODEL_PATH` is set, it loads the chosen saved model and writes `sample_id,predicted_stage` to `INFERENCE_OUTPUT_CSV`.
