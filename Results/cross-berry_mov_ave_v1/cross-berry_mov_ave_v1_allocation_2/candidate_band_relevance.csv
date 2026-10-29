@@ -1,0 +1,4 @@
+domain,start_nm,end_nm,fisher_relevance,normalized_fisher_relevance
+domain_1,520.0,560.0,9.308803353909969,0.0
+domain_2,680.0,720.0,2.4944307023183745,0.0
+domain_3,770.0,810.0,6.6171089038711886,0.0
